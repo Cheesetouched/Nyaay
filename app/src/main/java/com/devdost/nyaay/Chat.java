@@ -21,8 +21,8 @@ import com.firebase.client.FirebaseError;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class Chat extends AppCompatActivity {
+public class Chat extends AppCompatActivity implements View.OnClickListener {
+    ImageView selectPhoto;
     LinearLayout layout;
     RelativeLayout layout_2;
     ImageView sendButton;
@@ -45,6 +45,7 @@ public class Chat extends AppCompatActivity {
         layout = (LinearLayout) findViewById(R.id.layout1);
         layout_2 = (RelativeLayout) findViewById(R.id.layout2);
         sendButton = (ImageView) findViewById(R.id.sendButton);
+        selectPhoto = findViewById(R.id.selectPhoto);
         messageArea = (EditText) findViewById(R.id.messageArea);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
@@ -122,4 +123,13 @@ public class Chat extends AppCompatActivity {
         layout.addView(textView);
         scrollView.fullScroll(View.FOCUS_DOWN);
     }
+
+    @Override
+    public void onClick(View view) {
+
+        if (view == selectPhoto) {
+
+        }
+    }
+
 }
