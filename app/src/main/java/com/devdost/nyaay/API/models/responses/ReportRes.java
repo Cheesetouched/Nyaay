@@ -16,17 +16,28 @@ public class ReportRes {
     @SerializedName("drugs")
     private double drugs;
 
-    @SerializedName("raw")
-    private double raw;
+    @SerializedName("nudity")
+    private NudityRes nudity;
 
-    @SerializedName("partial")
-    private double partial;
+    class NudityRes {
+        @SerializedName("raw")
+        private double raw;
 
-    @SerializedName("safe")
-    private double safe;
+        @SerializedName("partial")
+        private double partial;
 
-    @SerializedName("prob")
-    private double prob;
+        @SerializedName("safe")
+        private double safe;
+    }
+
+    @SerializedName("offensive")
+    private OffensiveRes offensive;
+
+    class OffensiveRes {
+        @SerializedName("prob")
+        private double prob;
+    }
+
 
     public String getStatus() {
         return status;
@@ -45,19 +56,19 @@ public class ReportRes {
     }
 
     public double getRaw() {
-        return raw;
+        return nudity.raw;
     }
 
     public double getPartial() {
-        return partial;
+        return nudity.partial;
     }
 
     public double getSafe() {
-        return safe;
+        return nudity.safe;
     }
 
     public double getProb() {
-        return prob;
+        return offensive.prob;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.devdost.nyaay;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -7,9 +9,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +46,11 @@ import retrofit2.Response;
 
 public class Chat extends AppCompatActivity implements View.OnClickListener {
 
+    boolean weapon_found = false;
+    boolean alcohol_found = false;
+    boolean drugs_found = false;
+    boolean nudity_found = false;
+    boolean offensive_found = false;
     String SIGHTENGINE_API_USER = "1033368812";
     String SIGHTENGINE_API_SECRET = "nnFftX2d2vWeyn9f4ZRa";
     String download_url;
@@ -189,13 +199,50 @@ public class Chat extends AppCompatActivity implements View.OnClickListener {
         scrollView.fullScroll(View.FOCUS_DOWN);
     }
 
-    public void analysePhoto(Response<ReportRes> response) {
+    public void showError() {
 
-        boolean weapon_found = false;
-        boolean alcohol_found = false;
-        boolean drugs_found = false;
-        boolean nudity_found = false;
-        boolean offensive_found = false;
+        final Dialog dialog = new Dialog(Chat.this);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.notice);
+        TextView text = (TextView) dialog.findViewById(R.id.tag);
+        text.setTypeface(bold);
+        LinearLayout weapon = dialog.findViewById(R.id.weapon);
+        LinearLayout alcohol = dialog.findViewById(R.id.alcohol);
+        LinearLayout drugs = dialog.findViewById(R.id.drugs);
+        final LinearLayout nudity = dialog.findViewById(R.id.nudity);
+        final LinearLayout offensive = dialog.findViewById(R.id.offensive);
+
+        if (weapon_found) {
+            weapon.setVisibility(View.VISIBLE);
+        } else if (alcohol_found) {
+            alcohol.setVisibility(View.VISIBLE);
+        } else if (drugs_found) {
+            drugs.setVisibility(View.VISIBLE);
+        } else if (nudity_found) {
+            nudity.setVisibility(View.VISIBLE);
+        } else if (offensive_found) {
+            offensive.setVisibility(View.VISIBLE);
+        }
+
+        Button ok = (Button) dialog.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                weapon_found = false;
+                alcohol_found = false;
+                drugs_found = false;
+                nudity_found = false;
+                offensive_found = true;
+            }
+        });
+        dialog.show();
+    }
+
+    public void analysePhoto(Response<ReportRes> response) {
 
         double weapon = response.body().getWeapon();
         double alcohol = response.body().getAlcohol();
@@ -205,7 +252,31 @@ public class Chat extends AppCompatActivity implements View.OnClickListener {
         double safe = response.body().getSafe();
         double prob = response.body().getProb();
 
+        if (weapon > 0.5) {
+            weapon_found = true;
+        } else if (alcohol > 0.5) {
+            alcohol_found = true;
+        } else if (drugs > 0.5) {
+            drugs_found = true;
+        } else if ((raw + partial) > safe) {
+            nudity_found = true;
+        } else if (safe < 0.5) {
+            offensive_found = true;
+        }
 
+        if (weapon_found || alcohol_found || drugs_found || nudity_found || offensive_found) {
+            loading.dismiss();
+            Log.d("ANALYSIS", String.valueOf("WEAPON: " + weapon) + String.valueOf("ALCOHOL: " + alcohol) + String.valueOf("DRUGS: " + drugs) + String.valueOf("RAW: " + raw) + String.valueOf("PARTIAL: " + partial) + String.valueOf("SAFE: " + safe) + String.valueOf("PROB: " + prob));
+            showError();
+        } else {
+            loading.dismiss();
+
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message", download_url);
+            map.put("user", UserDetails.username);
+            reference1.push().setValue(map);
+            reference2.push().setValue(map);
+        }
 
     }
 
@@ -254,15 +325,12 @@ public class Chat extends AppCompatActivity implements View.OnClickListener {
 
                                     if (response.body().getStatus().equalsIgnoreCase("success")) {
                                         analysePhoto(response);
-                                    }
-
-                                    else {
+                                    } else {
                                         loading.dismiss();
                                         alert("Status: Some error occurred");
                                     }
 
-                                }
-                                else {
+                                } else {
                                     loading.dismiss();
                                     alert("Failed: Some error occurred");
                                 }

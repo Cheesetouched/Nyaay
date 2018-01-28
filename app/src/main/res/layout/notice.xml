@@ -1,0 +1,239 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialogcurve"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/a"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:background="@drawable/dialogcurvetop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/tag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Nyaay Bot: Content Blocked!"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/a"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="10sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="20sp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/text_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingRight="10sp">
+
+                <LinearLayout
+                    android:id="@+id/weapon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="WEAPONS :"
+                        android:textColor="#ff000000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingLeft="10sp"
+                        android:paddingStart="10sp"
+                        android:text="FOUND"
+                        android:textColor="#c0392b"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/alcohol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5sp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="ALCOHOL :"
+                        android:textColor="#ff000000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingLeft="10sp"
+                        android:paddingStart="10sp"
+                        android:text="FOUND"
+                        android:textColor="#c0392b"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/drugs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5sp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="DRUGS :"
+                        android:textColor="#ff000000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingLeft="10sp"
+                        android:paddingStart="10sp"
+                        android:text="FOUND"
+                        android:textColor="#c0392b"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/nudity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5sp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="NUDITY :"
+                        android:textColor="#ff000000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingLeft="10sp"
+                        android:paddingStart="10sp"
+                        android:text="FOUND"
+                        android:textColor="#c0392b"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/offensive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5sp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="OFFENSIVE :"
+                        android:textColor="#ff000000"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:paddingLeft="10sp"
+                        android:paddingStart="10sp"
+                        android:text="FOUND"
+                        android:textColor="#c0392b"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@+id/btn_dialog"
+            android:layout_marginTop="20sp"
+            android:background="@android:color/darker_gray" />
+
+        <LinearLayout
+            android:id="@+id/btn_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_centerInParent="true"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:background="?attr/selectableItemBackground"
+                android:text="OK"
+                android:textColor="#c0392b"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         tag = (TextView) findViewById(R.id.tag);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-        username.setText("rishabh");
+        username.setText("Rishabh");
         password.setText("12345");
         loginButton = (Button) findViewById(R.id.loginButton);
         bold = Typeface.createFromAsset(getAssets(), "fonts/semibold.ttf");
@@ -86,6 +86,7 @@ public class Login extends AppCompatActivity {
                                     } else if (obj.getJSONObject(user).getString("password").equals(pass)) {
                                         UserDetails.username = user;
                                         UserDetails.password = pass;
+                                        UserDetails.profile_url = obj.getJSONObject(user).getString("profile_url");
                                         startActivity(new Intent(Login.this, Users.class));
                                     } else {
                                         Toast.makeText(Login.this, "Incorrect Username/Password", Toast.LENGTH_LONG).show();

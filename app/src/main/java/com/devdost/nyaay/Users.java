@@ -1,5 +1,6 @@
 package com.devdost.nyaay;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -7,10 +8,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,8 +40,8 @@ public class Users extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
     ArrayList<String> al = new ArrayList<>();
-    ArrayList<Integer> random=new ArrayList<Integer>();
-    ArrayList<Integer> status=new ArrayList<Integer>();
+    ArrayList<Integer> random = new ArrayList<Integer>();
+    ArrayList<Integer> status = new ArrayList<Integer>();
     int totalUsers = 0;
     Typeface bold;
     ProgressDialog loading;
@@ -75,6 +81,37 @@ public class Users extends AppCompatActivity {
         RequestQueue rQueue = Volley.newRequestQueue(Users.this);
         rQueue.add(request);
 
+    }
+
+    public void showError(final Integer position) {
+
+        final Dialog dialog = new Dialog(Users.this);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dp_detect);
+        TextView text = (TextView) dialog.findViewById(R.id.tag);
+        text.setTypeface(bold);
+        Button yes = (Button) dialog.findViewById(R.id.yes);
+        Button no = (Button) dialog.findViewById(R.id.no);
+        yes.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                UserDetails.chatWith = al.get(position);
+                startActivity(new Intent(Users.this, Chat.class));
+            }
+        });
+
+        no.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     public void doOnSuccess(String s) {
@@ -124,8 +161,14 @@ public class Users extends AppCompatActivity {
                     View child = rv.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && gestureDetector.onTouchEvent(e)) {
                         int position = rv.getChildAdapterPosition(child);
-                        UserDetails.chatWith = al.get(position);
-                        startActivity(new Intent(Users.this, Chat.class));
+
+                        if (al.get(position).equalsIgnoreCase("Gaurav")) {
+                            showError(position);
+
+                        } else {
+                            UserDetails.chatWith = al.get(position);
+                            startActivity(new Intent(Users.this, Chat.class));
+                        }
 
                     }
                     return false;

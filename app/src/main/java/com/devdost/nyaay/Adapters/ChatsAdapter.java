@@ -10,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.devdost.nyaay.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> {
 
@@ -36,13 +39,17 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final ChatsAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.initial.setText(String.valueOf(names.get(i).charAt(0)).toUpperCase());
         viewHolder.name.setText(names.get(i));
+
+        if (names.get(i).equalsIgnoreCase("Gaurav")) {
+            Picasso.with(context).load("https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzQzMTY2NDc4/will-smith-9542165-1-402.jpg").into(viewHolder.dp);
+        } else {
+            viewHolder.initial.setText(String.valueOf(names.get(i).charAt(0)).toUpperCase());
+        }
 
         if (status.get(i) == 0) {
             viewHolder.offline.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             viewHolder.online.setVisibility(View.VISIBLE);
         }
     }
@@ -57,6 +64,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
         private TextView name;
         private ImageView offline;
         private ImageView online;
+        private CircleImageView dp;
 
         public ViewHolder(View view) {
             super(view);
@@ -66,6 +74,7 @@ public class ChatsAdapter extends RecyclerView.Adapter<ChatsAdapter.ViewHolder> 
             name.setTypeface(bold);
             offline = view.findViewById(R.id.offline);
             online = view.findViewById(R.id.online);
+            dp = view.findViewById(R.id.profile_image);
         }
     }
 
