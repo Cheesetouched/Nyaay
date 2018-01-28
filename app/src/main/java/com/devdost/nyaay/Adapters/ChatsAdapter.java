@@ -1,4 +1,4 @@
-package com.devdost.nyaay;
+package com.devdost.nyaay.Adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.devdost.nyaay.R;
 
 import java.util.ArrayList;
 

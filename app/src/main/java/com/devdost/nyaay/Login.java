@@ -41,6 +41,8 @@ public class Login extends AppCompatActivity {
         tag = (TextView) findViewById(R.id.tag);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        username.setText("rishabh");
+        password.setText("12345");
         loginButton = (Button) findViewById(R.id.loginButton);
         bold = Typeface.createFromAsset(getAssets(), "fonts/semibold.ttf");
         header.setTypeface(bold);
