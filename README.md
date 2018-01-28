@@ -1,10 +1,10 @@
 # Nyaay
-Nyaay - Developed for IET on Campus Hackathon In January '18
+*Nyaay - Developed for IET on Campus Hackathon In January '18*
 
-Problem: Driving The Innovation to Monitor Online sexual Abuse Against Children.
+**Problem**: Driving The Innovation to Monitor Online sexual Abuse Against Children.
 
-Solution: We have divided the problem statement into two Categories:
-1. Pre-abuse action(Preventing the abuse)
+**Solution**: We have divided the problem statement into two Categories:
+#####1. Pre-abuse action(Preventing the abuse)#####
 2. Post-abuse action
 
 
